@@ -8,20 +8,23 @@
 </head>
 <body>
     <div id="login-view" class="view active">
-        <div class="form-container">
-            <h2>Login / Registro</h2>
-            <input type="text" id="username" placeholder="Nome de usuário">
-            <input type="password" id="password" placeholder="Senha">
-            <div class="buttons">
-                <button id="login-btn">Entrar</button>
-                <button id="register-btn">Registrar</button>
+        <div class="login-background-overlay">
+            <div class="form-container">
+                <div class="logo">Best<span></span></div>
+                <input type="text" id="username" placeholder="Nome de Usuário">
+                <input type="password" id="password" placeholder="Senha">
+                <div class="buttons">
+                    <button id="login-btn">Entrar</button>
+                    <button id="register-btn">Cadastrar</button>
+                </div>
+                <p id="auth-error" class="error"></p>
             </div>
-            <p id="auth-error" class="error"></p>
         </div>
     </div>
 
     <div id="chat-view" class="view">
         <div class="sidebar">
+            <div class="logo-sidebar">Best<span></span></div>
             <h3>Usuários Online</h3>
             <ul id="user-list"></ul>
             <button id="logout-btn">Sair</button>

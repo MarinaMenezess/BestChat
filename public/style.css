@@ -3,47 +3,169 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #f0f2f5;
+    /* Cor de fundo principal alterada para o cinza escuro das imagens */
+    background-color: #333333;
 }
 
 .view { display: none; }
 .view.active { display: flex; }
 
-/* Estilos da Tela de Login */
+/* --- Estilos do Logo (para o Login e Chat) --- */
+.logo, .logo-sidebar {
+    font-size: 40px;
+    font-weight: bold;
+    color: white; /* Cor do texto "Best" */
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo span, .logo-sidebar span {
+    display: block;
+    width: 20px;
+    height: 10px;
+    background-color: #E21B3C; /* Cor da linha/detalhe vermelho */
+    border-radius: 50%;
+    margin-left: 5px;
+    transform: translateY(-5px);
+}
+
+.logo-sidebar {
+    margin-bottom: 30px; /* Maior espaçamento na sidebar */
+}
+
+/* --- Estilos da Tela de Login/Registro --- */
 #login-view {
     width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.login-background-overlay {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Efeito de Balões de Conversa em segundo plano (imagem 6f0b0d.png) */
+.login-background-overlay::before,
+.login-background-overlay::after {
+    content: '';
+    position: absolute;
+    background-color: #E21B3C; /* Cor vermelha do balão */
+    border-radius: 20px;
+    opacity: 0.3;
+}
+
+.login-background-overlay::before {
+    top: 5%;
+    left: 5%;
+    width: 250px;
+    height: 100px;
+    transform: rotate(-20deg);
+}
+
+.login-background-overlay::after {
+    bottom: 5%;
+    right: 5%;
+    width: 300px;
+    height: 120px;
+    transform: rotate(15deg);
+}
+/* Balões adicionais */
+.login-background-overlay .form-container::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: -150px;
+    width: 350px;
+    height: 100px;
+    background-color: #E21B3C;
+    border-radius: 20px;
+    opacity: 0.3;
+    transform: rotate(-10deg);
+    z-index: 1;
+}
+
+.login-background-overlay .form-container::after {
+    content: '';
+    position: absolute;
+    bottom: 20%;
+    right: -180px;
+    width: 350px;
+    height: 100px;
+    background-color: #E21B3C;
+    border-radius: 20px;
+    opacity: 0.3;
+    transform: rotate(10deg);
+    z-index: 1;
 }
 
 .form-container {
     padding: 30px;
-    background-color: white;
+    /* Cor de fundo do container alterada para o cinza escuro */
+    background-color: #333333;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5); /* Sombra mais escura */
     display: flex;
     flex-direction: column;
     width: 300px;
+    position: relative; /* Para posicionar os balões relativos a ele */
+    z-index: 10; /* Garante que o formulário fique sobre os balões de fundo */
 }
-.form-container h2 { text-align: center; color: #333; }
-.form-container input { padding: 12px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
-.form-container .buttons { display: flex; justify-content: space-between; }
-.form-container button {
+.form-container h2 { display: none; } /* O logo substitui o título */
+.form-container input { 
+    padding: 15px; 
+    margin-bottom: 15px; 
+    border: none; 
+    border-radius: 25px; /* Bordas mais arredondadas */
+    background-color: #666666; /* Cor de fundo do input */
+    color: white;
+}
+.form-container input::placeholder { color: #aaaaaa; }
+
+.form-container .buttons { display: flex; justify-content: space-between; margin-top: 20px; }
+
+/* Botão de Entrar (Login) em vermelho */
+#login-btn {
     padding: 12px;
     border: none;
-    border-radius: 4px;
-    background-color: #007bff;
+    border-radius: 25px;
+    background-color: #E21B3C !important; 
     color: white;
     cursor: pointer;
     flex: 1;
     margin: 0 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
-.form-container button:hover { background-color: #0056b3; }
-.error { color: red; text-align: center; height: 20px; }
+#login-btn:hover { background-color: #b3162e !important; }
+
+/* Botão de Registrar (Cadastrar) em cinza */
+#register-btn {
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #666666 !important;
+    color: white;
+    cursor: pointer;
+    flex: 1;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+#register-btn:hover { background-color: #555555 !important; }
+
+.error { color: #E21B3C; text-align: center; height: 20px; margin-top: 10px; }
 
 
-/* Estilos da Tela de Chat */
+/* --- Estilos da Tela de Chat --- */
 #chat-view {
     width: 100%;
     height: 100%;
@@ -52,38 +174,57 @@ body, html {
 
 .sidebar {
     width: 250px;
-    background-color: #333;
+    background-color: #2b2b2b; /* Fundo ligeiramente mais escuro para a sidebar */
     color: white;
     padding: 20px;
     display: flex;
     flex-direction: column;
 }
-.sidebar h3 { border-bottom: 1px solid #555; padding-bottom: 10px; }
+
+.sidebar h3 { 
+    border-bottom: 1px solid #555; 
+    padding-bottom: 10px; 
+    margin-top: 0;
+    font-weight: normal;
+}
+
 #user-list {
     list-style-type: none;
     padding: 0;
     flex-grow: 1;
 }
+
 #user-list li {
-    padding: 10px;
+    padding: 12px 10px; /* Padding ajustado */
     cursor: pointer;
     border-radius: 4px;
+    margin-bottom: 5px;
+    transition: background-color 0.2s;
 }
-#user-list li:hover, #user-list li.active { background-color: #555; }
+
+/* Estilo do usuário ativo (selecionado) */
+#user-list li:hover, 
+#user-list li.active { 
+    background-color: #3e3e3e; /* Cor do hover/ativo alterada */
+    font-weight: bold;
+}
+
 #logout-btn {
     padding: 10px;
-    background-color: #dc3545;
+    background-color: #dc3545; /* Mantido o vermelho padrão para destaque (pode ser ajustado) */
     color: white;
     border: none;
     cursor: pointer;
     border-radius: 4px;
+    margin-top: 10px;
 }
+#logout-btn:hover { background-color: #c82333; }
 
 .main-chat {
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    background-color: #e9ebee;
+    background-color: #f0f2f5; /* Fundo do chat mantido claro */
 }
 
 #welcome-message { text-align: center; margin-top: 50px; color: #555; }
@@ -94,37 +235,56 @@ body, html {
     flex-direction: column;
     height: 100%;
 }
+
 .chat-header {
     padding: 15px;
     background-color: white;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
+    color: #333;
+    font-size: 18px;
 }
+
 #messages {
     flex-grow: 1;
     padding: 20px;
     overflow-y: auto;
     list-style-type: none;
+    display: flex;
+    flex-direction: column;
 }
+
+/* Balões de mensagem para replicar o estilo das imagens */
 #messages li {
-    padding: 8px 12px;
-    margin-bottom: 10px;
-    max-width: 60%;
+    padding: 10px 15px;
+    margin-bottom: 15px;
+    max-width: 65%; /* Aumentado um pouco para se assemelhar */
     border-radius: 18px;
     word-wrap: break-word;
+    position: relative;
+    font-size: 15px;
 }
+
+/* Estilo das mensagens enviadas (SENT - Vermelho) */
 #messages li.sent {
-    background-color: #007bff;
+    background-color: #E21B3C; /* Cor vermelha do balão enviado */
     color: white;
     align-self: flex-end;
     margin-left: auto;
-}
-#messages li.received {
-    background-color: #fff;
-    color: #333;
-    align-self: flex-start;
+    /* Ajuste para o "bico" do balão */
+    border-bottom-right-radius: 2px;
 }
 
+/* Estilo das mensagens recebidas (RECEIVED - Cinza) */
+#messages li.received {
+    background-color: #aaaaaa; /* Cor cinza do balão recebido */
+    color: #333;
+    align-self: flex-start;
+    /* Ajuste para o "bico" do balão */
+    border-bottom-left-radius: 2px;
+}
+
+/* Formulário de Mensagem */
 #message-form {
     display: flex;
     padding: 10px;
@@ -136,13 +296,15 @@ body, html {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
+    margin-right: 10px;
 }
 #message-form button {
-    margin-left: 10px;
     padding: 10px 15px;
     border: none;
-    background-color: #007bff;
+    background-color: #007bff; /* Mantido azul para o botão de enviar (pode ser ajustado) */
     color: white;
     border-radius: 20px;
     cursor: pointer;
+    transition: background-color 0.3s;
 }
+#message-form button:hover { background-color: #0056b3; }

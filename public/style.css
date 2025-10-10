@@ -25,18 +25,9 @@ body, html {
     margin-bottom: 20px;
 }
 
-.logo span, .logo-sidebar span {
-    display: block;
-    width: 20px;
-    height: 10px;
-    background-color: #e21515; /* Cor da linha/detalhe vermelho */
-    border-radius: 50%;
-    margin-left: 5px;
-    transform: translateY(-5px);
-}
+.logo-sidebar  img{
+    width: 70%;
 
-.logo-sidebar {
-    margin-bottom: 30px; /* Maior espaçamento na sidebar */
 }
 
 /* --- Estilos da Tela de Login/Registro --- */
